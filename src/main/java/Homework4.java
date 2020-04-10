@@ -46,15 +46,6 @@ public class Homework4 {
 
 
 
-        /*
-        //print genre names and count
-        for(String genre : genreCount.keySet()){
-            //System.out.println(genre);
-            System.out.println(genre + "  " +  genreCount.get(genre).size());
-            //System.out.println(genreCount.get((genre)));
-        }
-        */
-
         //sorts genres hashamp into ascending order
         LinkedHashMap<String,Integer> sortedMap = sortDescendingOrder(genreCount);
 
@@ -104,8 +95,6 @@ public class Homework4 {
             count++;
         }
 
-
-
         System.out.println();
 
         //System.out.println(chart);
@@ -116,7 +105,7 @@ public class Homework4 {
 
 
 
-
+        //creats chart, displays, and saves pdf of chart
         XYChart display = new XYChart(500, 400);
         display.setTitle("Release Year");
         display.setXAxisTitle("Year");
@@ -134,15 +123,12 @@ public class Homework4 {
 
 
         new SwingWrapper(display).displayChart();
-        BitmapEncoder.saveBitmap(display, "./Sample_Chart", BitmapEncoder.BitmapFormat.PNG);
-
-
+        BitmapEncoder.saveBitmap(display, "./Data Visualization", BitmapEncoder.BitmapFormat.PNG);
 
     }
 
 
-
-
+    //sorts hashmap in descending order using linkedHashMap
     public static LinkedHashMap<String, Integer> sortDescendingOrder(HashMap<String, ArrayList<Movie>> genres){
         HashMap<String, Integer> map = new HashMap<>();
         for(String genre : genres.keySet()){
@@ -183,32 +169,10 @@ public class Homework4 {
         return genreCount;
     }
 
-/*
-    public static HashMap<String, Integer> sinceYears(HashMap<String, ArrayList<Movie>> map, int years){
-        HashMap<String, ArrayList<Movie>> genreCountSinceYear = new HashMap<>();
-        for(String movieTitle : map.keySet()){
-            Iterator it = map.get(movieTitle).iterator();
-            while(it.hasNext()){
-                String genre = it.next().toString();
-                if(genreCountSinceYear.containsKey(genre) ){
-                    int count = genreCountSinceYear.get(genre);
-                }
-                else{
-
-                }
-            }
-        }
-        //eturn genreCount;
-
-        return null;
-    }
-
- */
-
+    //removes movies in hashmap before currentyear - parameter
     public static HashMap<String, Movie> removeFromYear(HashMap<String, Movie> map, int year){
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int yearCutoff = currentYear - year;
-        //test
         System.out.println(yearCutoff + " movies onwards");
         ArrayList<String> namesToRemove = new ArrayList<>();
         for(String names : map.keySet()){
