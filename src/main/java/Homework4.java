@@ -3,6 +3,7 @@ import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYSeries;
+import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.io.File;
@@ -99,17 +100,30 @@ public class Homework4 {
         }
 
 
-        chart.remove(0.0);
-        System.out.println(chart);
+        chart.remove(0);
+        System.out.println();
 
+        //System.out.println(chart);
+        System.out.println("Year || Amount of movies released");
+        for(int num : chart.keySet()){
+            System.out.println(num + "  " + chart.get(num));
+        }
 
 
         XYChart display = new XYChart(500, 400);
         display.setTitle("Sample Chart");
         display.setXAxisTitle("X");
-        display.setXAxisTitle("Y");
-        XYSeries series = display.addSeries("y(x)", releaseYear, amountReleased);
-        series.setMarker(SeriesMarkers.CIRCLE);
+        display.setYAxisTitle("Y");
+        display.getStyler().setXAxisMin(1900.00);
+
+        display.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
+        display.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
+        display.getStyler().setXAxisDecimalPattern("####");
+        display.getStyler().setPlotMargin(0);
+        display.getStyler().setPlotContentSize(.95);
+
+        XYSeries series = display.addSeries("f(x)", releaseYear, amountReleased);
+        series.setMarker(SeriesMarkers.DIAMOND);
 
 
         new SwingWrapper(display).displayChart();
