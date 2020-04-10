@@ -90,17 +90,22 @@ public class Homework4 {
                 }
             }
         }
+
+
+        chart.remove(0);
+
+
         int [] releaseYear = new int[chart.size()];
         int[] amountReleased = new int[chart.size()];
+        int count = 0;
         for(int year : chart.keySet()){
-            int count = 0;
             releaseYear[count] = year;
             amountReleased[count] = chart.get(year);
             count++;
         }
 
 
-        chart.remove(0);
+
         System.out.println();
 
         //System.out.println(chart);
@@ -110,10 +115,12 @@ public class Homework4 {
         }
 
 
+
+
         XYChart display = new XYChart(500, 400);
-        display.setTitle("Sample Chart");
-        display.setXAxisTitle("X");
-        display.setYAxisTitle("Y");
+        display.setTitle("Release Year");
+        display.setXAxisTitle("Year");
+        display.setYAxisTitle("Movies Released");
         display.getStyler().setXAxisMin(1900.00);
 
         display.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
@@ -127,7 +134,7 @@ public class Homework4 {
 
 
         new SwingWrapper(display).displayChart();
-
+        BitmapEncoder.saveBitmap(display, "./Sample_Chart", BitmapEncoder.BitmapFormat.PNG);
 
 
 
